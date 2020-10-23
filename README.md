@@ -16,3 +16,58 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
 
 -   [github.com/jasonglassbrook](https://github.com/jasonglassbrook/) (you're already here)
 -   [linkedin.com/in/jasonglassbrook](https://www.linkedin.com/in/jasonglassbrook/)
+-   To email me, run the following code in your browser's console.
+    ```js
+    if (
+      window.confirm('If you click "OK", you will be redirected to email Jason.')
+    ) {
+      /* Can you figure out the secret code? */
+      const secret = {
+        base: 36,
+        codes: {
+          "1a": ["i"],
+          "1s": ["2"],
+          "2p": ["4", "a"],
+          "2q": ["d"],
+          "2s": ["j"],
+          "2t": ["1", "k"],
+          "2v": ["8"],
+          "2y": ["3"],
+          "2z": ["h"],
+          "3a": ["l"],
+          "30": ["9"],
+          "31": ["0"],
+          "32": ["7"],
+          "33": ["6", "f", "g"],
+          "36": ["e"],
+          "37": ["5", "b", "c"],
+        },
+      };
+      /* Convert the secret codes to an email address. */
+      const email = String.fromCodePoint(
+        ...Object.entries(secret.codes).reduce(
+          /* Convert the secret codes to a list code points. */
+          (codePointList, [secretCode, secretIndexList]) => {
+            /* Convert each secret code to a code point. */
+            const codePoint = parseInt(secretCode, secret.base);
+            for (secretIndex of secretIndexList) {
+              /* Convert each secret index to a real index. */
+              const index = parseInt(secretIndex, secret.base);
+              /* If necessary, grow the list of code points. */
+              const missingLength = index + 1 - codePointList.length;
+              if (missingLength > 0) {
+                codePointList = codePointList.concat(new Array(missingLength));
+              }
+              /* Place the code point. */
+              codePointList[index] = codePoint;
+            }
+            return codePointList;
+          },
+          /* Initial empty list. */
+          []
+        )
+      );
+      /* Redirect to email. */
+      window.location.href = `mailto:${email}`;
+    }
+    ```

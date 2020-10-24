@@ -8,14 +8,14 @@ interface Secret {
 */
 
 /***********************************************************
-  MAKE SECRET
+  ENCODE SECRET
 ***********************************************************/
 
-function toSecret(x /*: number*/, base /*: number*/) /*: string*/ {
+function encodeItem(x /*: number*/, base /*: number*/) /*: string*/ {
   return x.toString(base);
 }
 
-function makeSecret(s /*: string*/, base /*: number*/) /*: Secret*/ {
+function encodeSecret(s /*: string*/, base /*: number*/) /*: Secret*/ {
   /* Convert string `s` to a list of code points `codeList`. */
   const codeList = Array.from(s, (x) => x.codePointAt(0));
 
@@ -23,8 +23,8 @@ function makeSecret(s /*: string*/, base /*: number*/) /*: Secret*/ {
   const secretCodeDict = {};
   for (const [index, code] of codeList.entries()) {
     /* Make secret index, code. */
-    const secretIndex = toSecret(index, base);
-    const secretCode = toSecret(code, base);
+    const secretIndex = encodeItem(index, base);
+    const secretCode = encodeItem(code, base);
 
     /* If needed, add new key `secretCode` to `secretCodeDict`. */
     if (!(secretCode in secretCodeDict)) {
@@ -43,25 +43,25 @@ function makeSecret(s /*: string*/, base /*: number*/) /*: Secret*/ {
 }
 
 /***********************************************************
-  DISCOVER SECRET
+  DECODE SECRET
 ***********************************************************/
 
-function fromSecret(x /*: string*/, base /*: number*/) /*: number*/ {
+function decodeItem(x /*: string*/, base /*: number*/) /*: number*/ {
   return parseInt(x, base);
 }
 
-function discoverSecret(secret /*: Secret*/) /*: string*/ {
+function decodeSecret(secret /*: Secret*/) /*: string*/ {
   /* Initialize empty list of code points `codeList`. */
   const codeList = [];
 
   /* Reconstruct code points from the secret. */
   for (const [secretCode, secretIndexList] of Object.entries(secret.code)) {
     /* Convert each secret code to a code point. */
-    const code = fromSecret(secretCode, secret.base);
+    const code = decodeItem(secretCode, secret.base);
 
     for (secretIndex of secretIndexList) {
       /* Convert each secret index to a real index. */
-      const index = fromSecret(secretIndex, secret.base);
+      const index = decodeItem(secretIndex, secret.base);
 
       /* If necessary, grow the list of code points. */
       const missingLength = index + 1 - codeList.length;

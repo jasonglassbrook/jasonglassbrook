@@ -40,7 +40,7 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
           /* Decode secret code to a real code point. */
           const code = decodeItem(secretCode);
 
-          for (secretIndex of secretIndexList) {
+          for (const secretIndex of secretIndexList) {
           /* Decode secret index to a real index. */
           const index = decodeItem(secretIndex);
 

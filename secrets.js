@@ -61,7 +61,7 @@ function decodeSecret(secret /*: Secret*/) /*: string*/ {
     /* Decode secret code to a real code point. */
     const code = decodeItem(secretCode);
 
-    for (secretIndex of secretIndexList) {
+    for (const secretIndex of secretIndexList) {
       /* Decode secret index to a real index. */
       const index = decodeItem(secretIndex);
 

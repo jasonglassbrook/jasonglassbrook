@@ -10,13 +10,14 @@ I'm a full-stack web developer with a background in teaching and mechanical engi
 
 I develop with JavaScript/TypeScript and Python, but I enjoy learning new languages. I've developed front-end apps with React and back-end apps with Django and Node+Express. I've even developed a mobile app (Android/iOS) with React Native + Expo. Before I entered web development, I programmed with MATLAB/Simulink, C/C++, Fortran, and Java for research and school. I also taught MATLAB to engineering students.
 
-Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with my partner and our dog. I also enjoy learning new programming and markup languages on my own — because I'm a nerd 🤓 
+Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with my partner and our dog. I also enjoy learning new programming and markup languages on my own — because I'm a nerd 🤓
 
 ### Get In Touch
 
 -   [github.com/jasonglassbrook](https://github.com/jasonglassbrook/) (you're already here)
 -   [linkedin.com/in/jasonglassbrook](https://www.linkedin.com/in/jasonglassbrook/)
 -   To email me, run the following code in your browser's console.
+
     ```js
     if (
       window.confirm('If you click "OK", you will be redirected to email Jason.')
@@ -30,21 +31,21 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
       const email = String.fromCodePoint(
         ...Object.entries(secret.code).reduce(
           /* Convert the secret codes to a list code points. */
-          (codePointList, [secretCode, secretIndexList]) => {
+          (codeList, [secretCode, secretIndexList]) => {
             /* Convert each secret code to a code point. */
-            const codePoint = parseInt(secretCode, secret.base);
+            const code = parseInt(secretCode, secret.base);
             for (secretIndex of secretIndexList) {
               /* Convert each secret index to a real index. */
               const index = parseInt(secretIndex, secret.base);
               /* If necessary, grow the list of code points. */
-              const missingLength = index + 1 - codePointList.length;
+              const missingLength = index + 1 - codeList.length;
               if (missingLength > 0) {
-                codePointList = codePointList.concat(new Array(missingLength));
+                codeList = codeList.concat(new Array(missingLength));
               }
               /* Place the code point. */
-              codePointList[index] = codePoint;
+              codeList[index] = code;
             }
-            return codePointList;
+            return codeList;
           },
           /* Initial empty list. */
           []

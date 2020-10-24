@@ -41,3 +41,39 @@ function makeSecret(s /*: string*/, base /*: number*/) /*: Secret*/ {
     code: secretCodeDict,
   };
 }
+
+/***********************************************************
+  DISCOVER SECRET
+***********************************************************/
+
+function fromSecret(x /*: string*/, base /*: number*/) /*: number*/ {
+  return parseInt(x, base);
+}
+
+function discoverSecret(secret /*: Secret*/) /*: string*/ {
+  /* Initialize empty list of code points `codeList`. */
+  const codeList = [];
+
+  /* Reconstruct code points from the secret. */
+  for (const [secretCode, secretIndexList] of Object.entries(secret.code)) {
+    /* Convert each secret code to a code point. */
+    const code = fromSecret(secretCode, secret.base);
+
+    for (secretIndex of secretIndexList) {
+      /* Convert each secret index to a real index. */
+      const index = fromSecret(secretIndex, secret.base);
+
+      /* If necessary, grow the list of code points. */
+      const missingLength = index + 1 - codeList.length;
+      if (missingLength > 0) {
+        codeList.push(...Array(missingLength));
+      }
+
+      /* Place the code point. */
+      codeList[index] = code;
+    }
+  }
+
+  /* Convert the code points to a string; return. */
+  return String.fromCodePoint(...codeList);
+}

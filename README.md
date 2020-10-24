@@ -26,31 +26,32 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
         code: { "1a": ["i"], "1s": ["2"], "2p": ["4", "a"], "2q": ["d"], "2s": ["j"], "2t": ["1", "k"], "2v": ["8"], "2y": ["3"], "2z": ["h"], "3a": ["l"], "30": ["9"], "31": ["0"], "32": ["7"], "33": ["6", "f", "g"], "36": ["e"], "37": ["5", "b", "c"] },
       };
 
-      function decodeItem(x /*: string*/, base /*: number*/) /*: number*/ {
-        return parseInt(x, base);
-      }
-
       function decodeSecret(secret /*: Secret*/) /*: string*/ {
+        /* Define decoder. */
+        function decodeItem(x /*: string*/) /*: number*/ {
+          return parseInt(x, secret.base);
+        }
+
         /* Initialize empty list of code points `codeList`. */
         const codeList = [];
 
         /* Reconstruct code points from the secret. */
         for (const [secretCode, secretIndexList] of Object.entries(secret.code)) {
-          /* Convert each secret code to a code point. */
-          const code = decodeItem(secretCode, secret.base);
+          /* Decode secret code to a real code point. */
+          const code = decodeItem(secretCode);
 
           for (secretIndex of secretIndexList) {
-            /* Convert each secret index to a real index. */
-            const index = decodeItem(secretIndex, secret.base);
+          /* Decode secret index to a real index. */
+          const index = decodeItem(secretIndex);
 
-            /* If necessary, grow the list of code points. */
-            const missingLength = index + 1 - codeList.length;
-            if (missingLength > 0) {
-              codeList.push(...Array(missingLength));
-            }
+          /* If needed, grow the list of code points. */
+          const missingLength = index + 1 - codeList.length;
+          if (missingLength > 0) {
+            codeList.push(...Array(missingLength));
+          }
 
-            /* Place the code point. */
-            codeList[index] = code;
+          /* Place the code point. */
+          codeList[index] = code;
           }
         }
 

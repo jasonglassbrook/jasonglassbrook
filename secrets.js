@@ -11,14 +11,14 @@ interface Secret {
   ENCODE SECRET
 ***********************************************************/
 
-function encodeSecret(s /*: string*/, base /*: number*/) /*: Secret*/ {
+function encodeSecret(message /*: string*/, base /*: number*/) /*: Secret*/ {
   /* Define encoder. */
   function encodeItem(x /*: number*/) /*: string*/ {
     return x.toString(base);
   }
 
-  /* Convert string `s` to a list of code points `codeList`. */
-  const codeList = Array.from(s, (x) => x.codePointAt(0));
+  /* Convert string `message` to a list of code points `codeList`. */
+  const codeList = Array.from(message, (x) => x.codePointAt(0));
 
   /* Convert code points to a dictionary like `{ [secretCode]: [secretIndex, ...], ... }`. */
   const secretCodeDict = {};

@@ -9,6 +9,28 @@ interface Secret {
 
 /***********************************************************
   ENCODE SECRET
+------------------------------------------------------------
+  ### EXAMPLE ###
+  let encodedMessage = "keep it secret, keep it safe";
+  let secret = encodeSecret(encodedMessage, 16);
+  >>>
+  secret = {
+    base: 16,
+    code: {
+      "2c": ["e"],
+      "6b": ["0", "10"],
+      "20": ["4", "7", "f", "14", "17"],
+      "61": ["19"],
+      "63": ["a"],
+      "65": ["1", "2", "9", "c", "11", "12", "1b"],
+      "66": ["1a"],
+      "69": ["5", "15"],
+      "70": ["3", "13"],
+      "72": ["b"],
+      "73": ["8", "18"],
+      "74": ["6", "d", "16"],
+    },
+  }
 ***********************************************************/
 
 function encodeSecret(message /*: string*/, base /*: number*/) /*: Secret*/ {
@@ -45,6 +67,13 @@ function encodeSecret(message /*: string*/, base /*: number*/) /*: Secret*/ {
 
 /***********************************************************
   DECODE SECRET
+------------------------------------------------------------
+  ### EXAMPLE ###
+  let encodedMessage = "keep it secret, keep it safe";
+  let secret = encodeSecret(encodedMessage, 16);
+  let decodedMessage = decodeSecret(secret);
+  >>>
+  decodedMessage = keep it secret, keep it safe"
 ***********************************************************/
 
 function decodeSecret(secret /*: Secret*/) /*: string*/ {

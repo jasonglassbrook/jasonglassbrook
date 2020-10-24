@@ -1,14 +1,21 @@
 "use strict";
 
+/*
+interface Secret {
+  base: number;
+  code: Record<string, Array<string>>;
+}
+*/
+
 /***********************************************************
   MAKE SECRET
 ***********************************************************/
 
-function toSecret(x /* :number */, base /* :number */) {
+function toSecret(x /*: number*/, base /*: number*/) /*: string*/ {
   return x.toString(base);
 }
 
-function makeSecret(s /* :string */, base /* :number */) {
+function makeSecret(s /*: string*/, base /*: number*/) /*: Secret*/ {
   /* Convert string `s` to a list of code points `codeList`. */
   const codeList = Array.from(s, (x) => x.codePointAt(0));
 

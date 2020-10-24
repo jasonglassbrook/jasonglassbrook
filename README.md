@@ -24,11 +24,11 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
       /* Can you figure out the secret code? */
       const secret = {
         base: 36,
-        codes: { "1a": ["i"], "1s": ["2"], "2p": ["4", "a"], "2q": ["d"], "2s": ["j"], "2t": ["1", "k"], "2v": ["8"], "2y": ["3"], "2z": ["h"], "3a": ["l"], "30": ["9"], "31": ["0"], "32": ["7"], "33": ["6", "f", "g"], "36": ["e"], "37": ["5", "b", "c"] },
+        code: { "1a": ["i"], "1s": ["2"], "2p": ["4", "a"], "2q": ["d"], "2s": ["j"], "2t": ["1", "k"], "2v": ["8"], "2y": ["3"], "2z": ["h"], "3a": ["l"], "30": ["9"], "31": ["0"], "32": ["7"], "33": ["6", "f", "g"], "36": ["e"], "37": ["5", "b", "c"] },
       };
       /* Convert the secret codes to an email address. */
       const email = String.fromCodePoint(
-        ...Object.entries(secret.codes).reduce(
+        ...Object.entries(secret.code).reduce(
           /* Convert the secret codes to a list code points. */
           (codePointList, [secretCode, secretIndexList]) => {
             /* Convert each secret code to a code point. */

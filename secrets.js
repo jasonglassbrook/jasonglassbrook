@@ -73,7 +73,7 @@ function encodeSecret(message /*: string*/, base /*: number*/) /*: Secret*/ {
   let secret = encodeSecret(encodedMessage, 16);
   let decodedMessage = decodeSecret(secret);
   >>>
-  decodedMessage = keep it secret, keep it safe"
+  decodedMessage = "keep it secret, keep it safe"
 ***********************************************************/
 
 function decodeSecret(secret /*: Secret*/) /*: string*/ {

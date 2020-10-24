@@ -35,6 +35,7 @@ function makeSecret(s /*: string*/, base /*: number*/) /*: Secret*/ {
     secretCodeDict[secretCode].push(secretIndex);
   }
 
+  /* Make the secret object; return. */
   return {
     base: base,
     code: secretCodeDict,

@@ -63,6 +63,6 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
       const email = decodeSecret(secret);
 
       /* Redirect to email. */
-      window.location.href = `mailto:${email}`;
+      window.location.assign(`mailto:${email}`);
     }
     ```

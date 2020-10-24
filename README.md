@@ -4,7 +4,7 @@
 
 ### About Me
 
-Hi there 👋
+Hi there — I'm Jason 👋
 
 I'm a full-stack web developer with a background in teaching and mechanical engineering. I'm an experienced programmer who focuses on usability and writing clean, reusable code. I love solving challenging problems and figuring out complex systems.
 

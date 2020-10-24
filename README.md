@@ -41,17 +41,17 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
           const code = decodeItem(secretCode);
 
           for (const secretIndex of secretIndexList) {
-          /* Decode secret index to a real index. */
-          const index = decodeItem(secretIndex);
+            /* Decode secret index to a real index. */
+            const index = decodeItem(secretIndex);
 
-          /* If needed, grow the list of code points. */
-          const missingLength = index + 1 - codeList.length;
-          if (missingLength > 0) {
-            codeList.push(...Array(missingLength));
-          }
+            /* If needed, grow the list of code points. */
+            const missingLength = index + 1 - codeList.length;
+            if (missingLength > 0) {
+              codeList.push(...Array(missingLength));
+            }
 
-          /* Place the code point. */
-          codeList[index] = code;
+            /* Place the code point. */
+            codeList[index] = code;
           }
         }
 

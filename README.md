@@ -19,38 +19,48 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
 -   To email me, run the following code in your browser's console.
 
     ```js
-    if (
-      window.confirm('If you click "OK", you will be redirected to email Jason.')
-    ) {
+    if (window.confirm('If you click "OK", you will be redirected to email Jason.')) {
       /* Can you figure out the secret code? */
       const secret = {
         base: 36,
         code: { "1a": ["i"], "1s": ["2"], "2p": ["4", "a"], "2q": ["d"], "2s": ["j"], "2t": ["1", "k"], "2v": ["8"], "2y": ["3"], "2z": ["h"], "3a": ["l"], "30": ["9"], "31": ["0"], "32": ["7"], "33": ["6", "f", "g"], "36": ["e"], "37": ["5", "b", "c"] },
       };
-      /* Convert the secret codes to an email address. */
-      const email = String.fromCodePoint(
-        ...Object.entries(secret.code).reduce(
-          /* Convert the secret codes to a list code points. */
-          (codeList, [secretCode, secretIndexList]) => {
-            /* Convert each secret code to a code point. */
-            const code = parseInt(secretCode, secret.base);
-            for (secretIndex of secretIndexList) {
-              /* Convert each secret index to a real index. */
-              const index = parseInt(secretIndex, secret.base);
-              /* If necessary, grow the list of code points. */
-              const missingLength = index + 1 - codeList.length;
-              if (missingLength > 0) {
-                codeList = codeList.concat(new Array(missingLength));
-              }
-              /* Place the code point. */
-              codeList[index] = code;
+
+      function fromSecret(x /*: string*/, base /*: number*/) /*: number*/ {
+        return parseInt(x, base);
+      }
+
+      function discoverSecret(secret /*: Secret*/) /*: string*/ {
+        /* Initialize empty list of code points `codeList`. */
+        const codeList = [];
+
+        /* Reconstruct code points from the secret. */
+        for (const [secretCode, secretIndexList] of Object.entries(secret.code)) {
+          /* Convert each secret code to a code point. */
+          const code = fromSecret(secretCode, secret.base);
+
+          for (secretIndex of secretIndexList) {
+            /* Convert each secret index to a real index. */
+            const index = fromSecret(secretIndex, secret.base);
+
+            /* If necessary, grow the list of code points. */
+            const missingLength = index + 1 - codeList.length;
+            if (missingLength > 0) {
+              codeList.push(...Array(missingLength));
             }
-            return codeList;
-          },
-          /* Initial empty list. */
-          []
-        )
-      );
+
+            /* Place the code point. */
+            codeList[index] = code;
+          }
+        }
+
+        /* Convert the code points to a string; return. */
+        return String.fromCodePoint(...codeList);
+      }
+
+      /* Recover email from secret. */
+      const email = discoverSecret(secret);
+
       /* Redirect to email. */
       window.location.href = `mailto:${email}`;
     }

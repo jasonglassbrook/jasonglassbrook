@@ -33,7 +33,10 @@ interface Secret {
   }
 ***********************************************************/
 
-function encodeSecret(message /*: string*/, base /*: number*/) /*: Secret*/ {
+export function encodeSecret(
+  message /*: string*/,
+  base /*: number*/
+) /*: Secret*/ {
   /* Define encoder. */
   function encodeItem(x /*: number*/) /*: string*/ {
     return x.toString(base);
@@ -76,7 +79,7 @@ function encodeSecret(message /*: string*/, base /*: number*/) /*: Secret*/ {
   decodedMessage = "keep it secret, keep it safe"
 ***********************************************************/
 
-function decodeSecret(secret /*: Secret*/) /*: string*/ {
+export function decodeSecret(secret /*: Secret*/) /*: string*/ {
   /* Define decoder. */
   function decodeItem(x /*: string*/) /*: number*/ {
     return parseInt(x, secret.base);
@@ -107,4 +110,11 @@ function decodeSecret(secret /*: Secret*/) /*: string*/ {
 
   /* Convert the code points to a string; return. */
   return String.fromCodePoint(...codeList);
+}
+
+/**********************************************************/
+
+export default {
+  encodeSecret,
+  decodeSecret,
 }

@@ -1,11 +1,36 @@
 "use strict";
 
-/*
-interface Secret {
-  base: number;
-  code: Record<string, Array<string>>;
+/***********************************************************
+  WHAT IS A SECRET?
+------------------------------------------------------------
+  A `Secret` is an object like the following TypeScript interface.
+
+  ```ts
+  interface Secret {
+    base: number;
+    code: Record<string, Array<string>>;
+  }
+  ```
+
+  Because this is plain JavaScript, the goal here is to emulate the `Secret` interface with
+  `SecretInterface` and by providing `validateSecret` for runtime validation.
+***********************************************************/
+
+export const SecretInterface = {
+  base: (x) => typeof x === "number" && Number.isInteger(x),
+  code: (o) =>
+    typeof o === "object" &&
+    Object.keys(o).every((ok) => typeof ok === "string") &&
+    Object.values(o).every(
+      (ov) => Array.isArray(ov) && ov.every((ovv) => typeof ovv === "string")
+    ),
+};
+
+export function validateSecret(maybeSecret /*: Secret?*/) /*: boolean*/ {
+  return Object.entries(SecretInterface).every(([ik, iv]) =>
+    iv(maybeSecret[ik])
+  );
 }
-*/
 
 /***********************************************************
   ENCODE SECRET
@@ -115,6 +140,8 @@ export function decodeSecret(secret /*: Secret*/) /*: string*/ {
 /**********************************************************/
 
 export default {
+  SecretInterface,
+  validateSecret,
   encodeSecret,
   decodeSecret,
-}
+};

@@ -61,8 +61,10 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
 
       /* Recover email from secret. */
       const email = decodeSecret(secret);
+      const [emailBeforeAt, emailAfterAt] = email.split("@");
+      const emailWithTimestamp =  `${emailBeforeAt}+${Date.now().toString()}@${emailAfterAt}`;
 
       /* Redirect to email. */
-      window.location.assign(`mailto:${email}`);
+      window.location.assign(`mailto:${emailWithTimestamp}`);
     }
     ```

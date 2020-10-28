@@ -23,7 +23,7 @@ Outside of work, I enjoy drawing, gardening, cooking, running, and hiking with m
       /* Can you figure out the secret code? */
       const secret = {
         base: 36,
-        code: { "1a": ["i"], "1s": ["2"], "2p": ["4", "a"], "2q": ["d"], "2s": ["j"], "2t": ["1", "k"], "2v": ["8"], "2y": ["3"], "2z": ["h"], "3a": ["l"], "30": ["9"], "31": ["0"], "32": ["7"], "33": ["6", "f", "g"], "36": ["e"], "37": ["5", "b", "c"] },
+        code: { "1a": ["p"], "1s": ["9"], "2p": ["b", "h"], "2q": ["k"], "2r": ["5"], "2s": ["q"], "2t": ["1", "4", "7", "r"], "2v": ["f"], "2y": ["a"], "2z": ["o"], "3a": ["s"], "17": ["2"], "30": ["g"], "31": ["0"], "32": ["e"], "33": ["d", "m", "n"], "36": ["6", "l"], "37": ["3", "c", "i", "j"], "38": ["8"] }
       };
 
       function decodeSecret(secret /*: Secret*/) /*: string*/ {
